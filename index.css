@@ -1,0 +1,56 @@
+html,
+body {
+	height: 100%;
+	background-color: #f8f9fa;
+}
+div {
+	width: 50%;
+	padding-left: 5%;
+	padding-bottom: 2%;
+	position: absolute;
+	top: 30%;
+	left: 25%;
+	box-shadow: -4px 5px 115px -7px rgba(0, 0, 0, 0.75);
+}
+
+button {
+	width: 10%;
+	padding: 10px;
+	margin: 10px;
+	color: blue;
+	border-color: blue;
+}
+button:hover {
+	cursor: pointer;
+	border-color: green;
+}
+.prompt-button {
+	width: 25%;
+	margin-left: 10%;
+}
+
+.prompt-input {
+	border-radius: 0px;
+	width: 35%;
+}
+
+.describe {
+	color: 000;
+	font-size: 30px;
+	font-weight: bold;
+}
+input {
+	padding: 9px;
+	border-radius: 10px;
+	border: 1px solid blue;
+}
+.the-counter {
+	border: 1px green solid;
+	display: inline-block;
+	width: 20%;
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
