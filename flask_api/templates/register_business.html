@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>WeConnect</title>
+	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='custom.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='navbar.css')}}">
+</head>
+<body>
+
+	<ul>
+		<li><a href="#home">{{name}}</a></li>
+		<li><a href="/api/businesses/<int:businessid>">Update business</a></li>
+		<li><a href="/api/businesses">Businesses</a></li>
+		<li><a href="business_profile.html">Business profile</a></li>
+		<li><a href="/api/auth/reset-password">Reset Password</a></li>
+		<li  style="float:right"><a href="/api/auth/logout">Logout</a></li>
+	</ul>
+	
+	<div class="container mt-5">
+
+		<div class="row">
+			<div class="col-md-7">
+				<code>{{data}}</code>
+				{% if data %}
+				<a class="btn btn-info" href="/api/businesses/1" role="button">
+					{{data.name}} profile
+				</a>
+				{% endif %}
+			</div>
+			<div class="col-md-5">
+				<form action="/api/businesses" method="POST" role="form">
+					<legend class="text-center">Register your business</legend>
+
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" placeholder="Business Name">
+					</div>
+
+					<div class="form-group">
+						<input type="text" name="location" class="form-control" placeholder="Business Location">
+					</div>
+
+					<div class="form-group">
+						<textarea name="services" class="form-control" rows="3" required="required" placeholder="Services or products dealt in, comma separated"></textarea>
+					</div>
+
+					<button type="submit" class="btn btn-primary btn-block">Register</button>
+				</form>
+			</div>
+		</div>
+
+
+		
+
+	</div>
+</body>
+</html>

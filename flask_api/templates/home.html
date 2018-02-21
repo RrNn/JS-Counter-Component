@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='custom.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='navbar.css')}}">
+</head>
+<body>
+	<ul>
+		<li><a href="#home">{{name}}</a></li>
+		<li><a href="/api/businesses/<int:businessid>">Update business</a></li>
+		<li><a href="/api/businesses">Businesses</a></li>
+		<li><a href="business_profile.html">Business profile</a></li>
+		<li><a href="/api/auth/reset-password">Reset Password</a></li>
+		<li  style="float:right"><a href="/api/auth/logout">Logout</a></li>
+	</ul>
+
+</body>
+</html>
