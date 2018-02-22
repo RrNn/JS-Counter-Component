@@ -23,37 +23,40 @@ def before_request():
 
 @app.route('/')
 def home():
-    return 'hello'
+    return 'Home Page'
 
 
-@app.route('/api/auth/register', methods=['GET', 'POST'])
+@app.route('/api/auth/register', methods=['POST'])
 def register():
-    if request.method == 'GET':
-        return render_template('register_user.html')
-    else:
-        name = request.form.get('name')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        session['username'] = request.form.get('username')
-        user = User(name, email, password)
-
-        return render_template('home.html', name=name)
+    name = 'User name'
+    email = 'User email'
+    password = 'User password'
+    user = User()
+    user.register(name, email, password)
+    return jsonify(user.get_name())
 
 
 @app.route('/api/auth/login', methods=['POST'])
-@app.route('/api/auth/logout', methods=['GET'])
+def login():
+    user = User()
+    return user.login()
+
+
+@app.route('/api/auth/logout', methods=['POST'])
 # this should be changed to a POST request after, using GET for now
 def logout():
-    session.pop('username', None)
-
-    return render_template('login.html')
+    user = User()
+    return user.logout()
 
 
 # reset password
 
 @app.route('/api/auth/reset-password', methods=['POST'])
 def reset_password():
-    return "Reset your password"
+    new_password = 'updated password'
+    user = User()
+    user.reset_pass(new_password)
+    return jsonify(user.get_name())
 
 
 # register a business or get all businesses
@@ -61,17 +64,19 @@ def reset_password():
 @app.route('/api/businesses', methods=['POST', 'GET'])
 def handle_business():
     if request.method == 'GET':
-
-        return render_template('register_business.html')
+        business = Business()
+        data = business.getAll()
+        return jsonify(data)
     else:
-        name = request.form.get('name')
-        location = request.form.get('location')
-        services = request.form.get('services')
-        business = Business(name, location, services)
+        name = 'some business name'
+        location = 'the business location'
+        services = 'services offered'
+        business = Business()
+        business.register_business(name, location, services)
         data = business.getAll()
         if data:
-            return render_template('register_business.html', data=data)
-        return render_template('register_business.html')
+            return jsonify(data)
+        return 'No data'
 
 
 # update a business or remove a business or get a business
@@ -80,11 +85,22 @@ def handle_business():
 @app.route('/api/businesses/<int:businessid>', methods=['PUT', 'DELETE', 'GET'])
 def handle_business_profile(businessid):
     if request.method == 'GET':
-        return render_template('business_profile.html')
+        business = Business()
+        data = business.getOne()
+        return jsonify(data)
     elif request.method == 'PUT':
-        return 'Updating the business'
+        name = 'some business name'
+        location = 'updated location'
+        services = 'updated services'
+        new_business = Business()
+        new_business.update_business(name, location, services)
+        return jsonify(new_business.getAll())
     else:
-        return 'Deleting the business'
+        name = 'some business name'
+        business = Business()
+        business.delete_business(name)
+        return jsonify(business.getAll())
+
 
 # review a business or get all reviews for a business
 
